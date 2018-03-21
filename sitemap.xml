@@ -2,13 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/README.html</loc>
-    
-    <lastmod>2018-03-21T14:38:18.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2018/03/21/ES6%EF%BC%9Aexport-default-%E5%92%8C-export-%E5%8C%BA%E5%88%AB/</loc>
     
     <lastmod>2018-03-21T12:29:40.000Z</lastmod>
