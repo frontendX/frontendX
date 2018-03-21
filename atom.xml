@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>佛性前端</title>
+  
+  <subtitle>你们最喜欢的博客</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2018-03-21T08:07:15.000Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>小bbbbbb</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo部署到github</title>
+    <link href="http://yoursite.com/2018/03/21/hexo%E9%83%A8%E7%BD%B2%E5%88%B0github/"/>
+    <id>http://yoursite.com/2018/03/21/hexo部署到github/</id>
+    <published>2018-03-21T07:58:43.000Z</published>
+    <updated>2018-03-21T08:07:15.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文主要介绍如何成功搭建hexo本地博客并部署到github上。</p><a id="more"></a><h3 id="一、首先搭建-hexo-本地博客"><a href="#一、首先搭建-hexo-本地博客" class="headerlink" title="一、首先搭建 hexo 本地博客"></a>一、首先搭建 hexo 本地博客</h3><p>1、git和Node.js都安装成功后，安装hexo，命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install hexo -g</span><br></pre></td></tr></table></figure></p><p>2、创建 my- hexo 文件夹，命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir my-hexo</span><br></pre></td></tr></table></figure></p><p>3、my- hexo 安装成功后，在该文件夹下执行如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure></p><p>4、启动本地服务，现在已经搭建起本地的 hexo 博客了，执行以下命令，然后到浏览器输入 <code>localhost:4000</code> 查看：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo generate 或 hexo g    // 生成静态文件</span><br><span class="line">hexo server 或 hexo s        // 启动服务器。默认情况下，访问网址为： http://localhost:4000/</span><br></pre></td></tr></table></figure></p><p>5、到此，本地博客已经搭建起来了，如下图（这是添加了文章，换了主题的博客）<br><img src="https://upload-images.jianshu.io/upload_images/1726248-7e71fb085f79722c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="我的博客"></p><h3 id="二、将-hexo-本地博客部署到github上"><a href="#二、将-hexo-本地博客部署到github上" class="headerlink" title="二、将 hexo 本地博客部署到github上"></a>二、将 hexo 本地博客部署到github上</h3><p>1、创建repository<br>这里的 repository 名必须使用你的github的用户，即我的用户名为 <code>frontend</code> ，那么网址必须为 <code>frontendX.github.io</code> ，如下图（创建repository）中红色框。<br><img src="https://upload-images.jianshu.io/upload_images/1726248-f1b9512f1b4e8e15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="创建repository"></p><p>2、部署<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// 编辑 _config.yml ，在部署时，要把下面的 zippera 都换成你的账号名。</span><br><span class="line"></span><br><span class="line">deploy:</span><br><span class="line">    type: git</span><br><span class="line">    repository: https://github.com/frontendX/frontendX.git</span><br><span class="line">    branch: master</span><br><span class="line"></span><br><span class="line"> // 执行下列指令即可完成部署。</span><br><span class="line"></span><br><span class="line"> hexo g</span><br><span class="line"> hexo d</span><br><span class="line"></span><br><span class="line"> 如果提示：ERROR Deployer not found: git</span><br><span class="line"> 执行以下以下命令：npm install hexo-deployer-git --save</span><br><span class="line"></span><br><span class="line"> 完成之后再执行：</span><br><span class="line">    hexo generate</span><br><span class="line">    hexo deploy</span><br></pre></td></tr></table></figure></p><p> <strong>记住：每次修改本地文件后，需要 <code>hexo g</code> 才能保存，<code>hexo d</code> 才能部署到github。每次使用命令时，都要在该项目目录下。</strong></p><p><em>注意：部署中遇到的问题</em></p><p>当 <code>repository</code> 名是 <code>froentendX</code>（修改前 - 1）的时候，<a href="https://frontendx.github.io/" target="_blank" rel="noopener">https://frontendx.github.io/</a> 页面访问不了；需要把 <code>froentendX</code> 修改成 <code>frontendX.github.io</code>（修改后 - 2）<br><img src="https://upload-images.jianshu.io/upload_images/1726248-a80dab99d98acc8d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="修改前 - 1"></p><p><img src="https://upload-images.jianshu.io/upload_images/1726248-a3e865480fa01273.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="修改后 - 2"></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文主要介绍如何成功搭建hexo本地博客并部署到github上。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="前端开发" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="github" scheme="http://yoursite.com/tags/github/"/>
+    
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ES6：export default 和 export 区别</title>
+    <link href="http://yoursite.com/2018/03/21/ES6%EF%BC%9Aexport-default-%E5%92%8C-export-%E5%8C%BA%E5%88%AB/"/>
+    <id>http://yoursite.com/2018/03/21/ES6：export-default-和-export-区别/</id>
+    <published>2018-03-21T01:55:47.000Z</published>
+    <updated>2018-03-21T04:23:27.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文通过主要介绍export default 和 export 的区别。</p><a id="more"></a><h2 id="export-default-和-export-区别："><a href="#export-default-和-export-区别：" class="headerlink" title="export default 和 export 区别："></a>export default 和 export 区别：</h2><p>1.export与export default均可用于导出常量、函数、文件、模块等<br>2.你可以在其它文件或模块中通过import+(常量 | 函数 | 文件 | 模块)名的方式，将其导入，以便能够对其进行使用<br>3.在一个文件或模块中，export、import可以有多个，export default仅有一个<br>4.通过export方式导出，在导入时要加{ }，export default则不需要</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">1.export</span><br><span class="line">//a.js</span><br><span class="line">export const str = &quot;blablabla~&quot;;</span><br><span class="line">export function log(sth) &#123;</span><br><span class="line">  return sth;</span><br><span class="line">&#125;</span><br><span class="line">对应的导入方式：</span><br><span class="line"></span><br><span class="line">//b.js</span><br><span class="line">import &#123; str, log &#125; from &apos;a&apos;; //也可以分开写两次，导入的时候带花括号</span><br><span class="line"></span><br><span class="line">2.export default</span><br><span class="line">//a.js</span><br><span class="line">const str = &quot;blablabla~&quot;;</span><br><span class="line">export default str;</span><br><span class="line">对应的导入方式：</span><br><span class="line"></span><br><span class="line">//b.js</span><br><span class="line">import str from &apos;a&apos;; //导入的时候没有花括号</span><br></pre></td></tr></table></figure><h2 id="使用export-default命令，为模块指定默认输出，这样就不需要知道所要加载模块的变量名"><a href="#使用export-default命令，为模块指定默认输出，这样就不需要知道所要加载模块的变量名" class="headerlink" title="使用export default命令，为模块指定默认输出，这样就不需要知道所要加载模块的变量名"></a>使用export default命令，为模块指定默认输出，这样就不需要知道所要加载模块的变量名</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//a.js</span><br><span class="line">let sex = &quot;boy&quot;;</span><br><span class="line">export default sex（sex不能加大括号）</span><br><span class="line">//原本直接export sex外部是无法识别的，加上default就可以了.但是一个文件内最多只能有一个export default。</span><br><span class="line">其实此处相当于为sex变量值&quot;boy&quot;起了一个系统默认的变量名default，自然default只能有一个值，所以一个文件内不能有多个export default。</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// b.js</span><br><span class="line">本质上，a.js文件的export default输出一个叫做default的变量，然后系统允许你为它取任意名字。所以可以为import的模块起任何变量名，且不需要用大括号包含</span><br><span class="line">import any from &quot;./a.js&quot;</span><br><span class="line">import any12 from &quot;./a.js&quot;</span><br><span class="line">console.log(any,any12)   // boy,boy</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文通过主要介绍export default 和 export 的区别。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="前端开发" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>content</title>
+    <link href="http://yoursite.com/2018/03/19/content/"/>
+    <id>http://yoursite.com/2018/03/19/content/</id>
+    <published>2018-03-19T15:32:02.000Z</published>
+    <updated>2018-03-21T04:23:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>神秘的内容~</p><a id="more"></a>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;神秘的内容~&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="前端开发" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2018/03/19/hello-world/"/>
+    <id>http://yoursite.com/2018/03/19/hello-world/</id>
+    <published>2018-03-19T01:55:47.000Z</published>
+    <updated>2018-03-21T04:25:06.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post2"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      
+    
+    </summary>
+    
+    
+      <category term="前端开发" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
+    
+  </entry>
+  
+</feed>
