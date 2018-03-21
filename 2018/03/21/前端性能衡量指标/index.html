@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="zh-Hant-HK"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="ie=edge"><title>前端性能衡量指标 | 佛性前端</title><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"><script src="/js/third-party/jquery.min.js">           </script><script src="/js/third-party/velocity.min.js">           </script><script src="/js/third-party/velocity.ui.min.js">           </script><link rel="icon" href="/img/favicon.ico"></head><body><nav id="nav-bar"><nav class="clear-fix" id="nav-container"><div class="pull-left" id="page-home"><a href="/">佛性前端</a></div><i class="fa fa-bars pull-right" id="toggle-nav" aria-hidden="true"></i><ul class="pull-right" id="navs"><li><a class="nav" href="/">Home</a></li><li><a class="nav" href="/about">About</a></li><li><a class="nav" href="/tags">Tags</a></li></ul></nav></nav><header id="header-info"><div id="header-container"><div id="site-info"><div id="terminal-pl"><div id="top-bar"><ul id="control"><li class="btn"></li><li class="btn"></li><li class="btn"></li></ul><div id="file-path"><i class="fa fa-folder folder-ic" aria-hidden="true"></i> 小bbbbbb 10 X 10</div></div><div id="code-pl">Last updated: 2018-03-21<br>小bbbbbb:~ Desktop$ <span class="code-pl-input">node 前端性能衡量指标.js</span><br><br>> Post.tags <br><a class="tag" href="#前端开发"><span>前端开发</span></a><a class="tag" href="#前端优化"><span>前端优化</span></a><br><br>> Post.next <br><a href="/2018/03/21/hexo部署到github/"><span class="answer">hexo部署到github</span></a></div></div></div></div></header><div id="content-outer"><div id="content-inner"><article id="post"><a class="article-title">前端性能衡量指标</a><time class="article-date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-03-21</time><p>本文主要介绍前端性能衡量指标，对于一个网站如果希望抓住用户，网站的速度以及稳定性是非常重要的。</p>
+<a id="more"></a>
+<h2 id="性能衡量指标"><a href="#性能衡量指标" class="headerlink" title="性能衡量指标"></a>性能衡量指标</h2><p><strong>指标：</strong></p>
+<ul>
+<li>白屏时间</li>
+<li>首屏时间</li>
+<li>用户可交互时间</li>
+<li>完全加载时间</li>
+<li>首字节时间</li>
+<li>DNS 解析时间</li>
+<li>TCP 连接时间</li>
+<li>HTTP 请求时间</li>
+<li>HTTP 响应时间</li>
+</ul>
+<p><strong>维度：</strong></p>
+<ul>
+<li>运营商</li>
+<li>网络</li>
+<li>URL</li>
+</ul>
+<h2 id="性能监控"><a href="#性能监控" class="headerlink" title="性能监控"></a>性能监控</h2><p><strong>如何监控</strong></p>
+<ul>
+<li><a href="https://link.juejin.im/?target=http%3A%2F%2Ffex.baidu.com%2Fblog%2F2014%2F05%2Fbuild-performance-monitor-in-7-days%2F" target="_blank" rel="noopener">7 天打造前端性能监控系统</a></li>
+<li><a href="https://link.juejin.im/?target=http%3A%2F%2Fweb.jobbole.com%2F84264%2F" target="_blank" rel="noopener">使用性能API快速分析web前端性能</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fwww.zhihu.com%2Fquestion%2F37585246" target="_blank" rel="noopener">你是如何搭建 Web 前端性能监控系统的</a></li>
+</ul>
+<h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><p><strong>优化点：</strong></p>
+<ul>
+<li>高频事件消抖、节流。使用<em>.debounce()和</em>. throttle()，控制高频事件的操作，如：scroll、onChange<ul>
+<li>_.debounce()的多次连续的调用，最终实际上只会调用一次；</li>
+<li>_. throttle()将频繁调用的函数限定在一个给定的调用频率内。</li>
+</ul>
+</li>
+<li>JavaScritp很快，但是DOM很慢，减少修改DOM。<ul>
+<li>DOM的渲染需要计算DOM+CSSOM，每次DOM和CSSOM的每次修改都会触发重绘；<ul>
+<li>渲染过程：JavaScript -&gt; Style -&gt; Layoout -&gt; Paint -&gt; Composite</li>
+</ul>
+</li>
+<li>避免 position: fixed;布局，Z轴图层堆叠关系会改变，引起重绘；</li>
+<li>图层隔离：将那些会变动的元素提升至单独的图层，比如：动画、渐变；</li>
+<li>降低图层复杂度；</li>
+<li>避免线程阻塞；</li>
+<li>优化CSS；</li>
+<li>文件：引入方式、位置、文件合并、延迟加载；</li>
+<li>硬件加速：GPU加速渲染</li>
+</ul>
+</li>
+</ul>
+<p><strong>基于各环节优化：</strong><br><img src="https://upload-images.jianshu.io/upload_images/1726248-530cd1c4fe65d9e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="优化流程"></p>
+<ul>
+<li>减少http请求，合理设置 HTTP缓存</li>
+<li>使用HTTP/2</li>
+<li>持久连接，使用 keep-alive 或者 WebSocket</li>
+<li>使用浏览器缓存</li>
+<li>启用压缩</li>
+<li>CSS Sprites</li>
+<li>LazyLoad Images</li>
+<li>样式文件放在顶部，脚本文件放在底部</li>
+<li>减少 cookie 传输</li>
+<li>CDN 加速<ul>
+<li>CDN（contentdistribute network，内容分发网络）的本质仍然是一个缓存，而且将数据缓存在离用户最近的地方，使用户以最快速度获取数据，即所谓网络访问第一跳。</li>
+</ul>
+</li>
+<li>反向代理<ul>
+<li>传统代理服务器位于浏览器一侧，代理浏览器将http请求发送到互联网上，而反向代理服务器位于网站机房一侧，代理网站web服务器接收http请求。</li>
+<li>论坛网站，把热门词条、帖子、博客缓存在反向代理服务器上加速用户访问速度，当这些动态内容有变化时，通过内部通知机制通知反向代理缓存失效，反向代理会重新加载最新的动态内容再次缓存起来。</li>
+<li>此外，反向代理也可以实现负载均衡的功能，而通过负载均衡构建的应用集群可以提高系统总体处理能力，进而改善网站高并发情况下的性能。</li>
+</ul>
+</li>
+<li>面向未来，考虑 service worker</li>
+</ul>
+</article><nav id="pagination"><div class="pagination clear-fix"><div class="page-next pull-right"><a href="/2018/03/21/hexo部署到github/"><span>hexo部署到github</span><i class="fa fa-chevron-right"></i></a></div></div></nav></div></div><footer><div id="footer-inner"><div class="social-icons"></div><p class="design-info">power by <a href="https://hexo.io" target="_blank">Hexo</a> | theme <a href="https://github.com/lazysheep666/terminal_theme" target="_blank">Teminal</a></p><p class="copyright">Copyright © 小bbbbbb Blog 2018</p></div></footer><script src="/js/nav.js"></script><script src="/js/scroll.js"></script><script src="/js/index.js"></script></body></html>
