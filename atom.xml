@@ -202,9 +202,9 @@
     
       <category term="前端开发" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
-      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
-    
       <category term="github" scheme="http://yoursite.com/tags/github/"/>
+    
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
     
   </entry>
   
