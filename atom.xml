@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-06-25T02:11:28.000Z</updated>
+  <updated>2018-07-02T03:04:16.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JavaScript 概念：BOM-window-ducoment、DOM-document/element/event</title>
+    <link href="http://yoursite.com/2018/07/02/JavaScript-%E6%A6%82%E5%BF%B5%EF%BC%9ABOM-window-ducoment%E3%80%81DOM-document-element-event/"/>
+    <id>http://yoursite.com/2018/07/02/JavaScript-概念：BOM-window-ducoment、DOM-document-element-event/</id>
+    <published>2018-07-02T02:27:12.000Z</published>
+    <updated>2018-07-02T03:04:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>JavaScript = EMCAScript + BOM + DOM</p><p>BOM 定义了JavaScript可以进行操作的浏览器的各个功能部件的接口；<br>DOM 是一个使程序和脚本有能力动态地访问和更新文档的内容、结构以及样式的平台和语言中立的接口。</p><ul><li>DOM是W3C的标准（所有浏览器公共遵守的标准）</li><li>BOM是各个浏览器厂商根据DOM在各自浏览器上的实现</li></ul><p>注：<strong>window VS. document，BOM VS. DOM</strong></p><p>window是BOM对象，而非JavaScript对象，Window 对象表示浏览器中打开的窗口，不过恰好为EMCAScript中所定义的Global对象。BOM的核心是window，而window对象又具有双重角色，它既是通过js访问浏览器窗口的一个接口，又是一个global全局对象。<br>由于window包含了document属性，因此JavaScript可以直接通过使用window的document对象来访问、检索、修改文档内容与结构。因为document对象又是DOM的根节点，所以可以理解为BOM包含了DOM。即浏览器提供出来给予访问的是BOM对象，而BOM对象再访问到DOM对象，从而js可以操作浏览器以及浏览器读取到的文档。</p><p>通俗来讲：<br>DOM 就是针对 HTML 和 XML 提供的一个API，就是说为了能以编程的方法操作这个 HTML 的内容（比如添加某些元素、修改元素的内容、删除某些元素），我们把这个 HTML 看做一个对象树（DOM树），它本身和里面的所有东西比如 <code>&lt;div&gt;&lt;/div&gt;</code> 这些标签都看做一个对象，每个对象都叫做一个节点（node），节点可以理解为 DOM 中所有 Object 的父类。</p><p>DOM 是为了操作文档出现的 API，document 是其的一个对象；<br>BOM 是为了操作浏览器出现的 API，window 是其的一个对象。</p><p>图示化说明（版权非我）</p><p><img src="../../images/BOM-DOM.jpg" alt="BOM-DOM"></p><p>归DOM管的：<br>E区（就是你说的document。由web开发人员呕心沥血写出来的一个文件夹，里面有index.html，CSS和JS什么鬼的，部署在服务器上，我们可以通过浏览器的地址栏输入URL然后回车将这个document加载到本地，浏览，右键查看源代码等）</p><p>归BOM管的：<br>A区（浏览器的标签页，地址栏，搜索栏，书签栏，窗口放大还原关闭按钮，菜单栏等）<br>B区（浏览器的右键菜单）<br>C区（document加载时的状态栏，显示http状态码等）<br>D区（滚动条scroll bar）</p><h3 id="BOM的组成"><a href="#BOM的组成" class="headerlink" title="BOM的组成"></a>BOM的组成</h3><p>BOM（browser object model,API）是Window对象、Document对象、History对象、Location对象、Navigator对象、Screen对象等合起来组成的模型，至今没有各个浏览器统一的公开标准，但是一般各个浏览器都支持。</p><p><img src="../../images/BOM.jpeg" alt="BOM-DOM"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h3&gt;&lt;p&gt;JavaScript = EMCAScript + BOM + DOM&lt;/p&gt;
+&lt;p&gt;BOM 定义了JavaScript可以
+      
+    
+    </summary>
+    
+    
+      <category term="javascript概念" scheme="http://yoursite.com/tags/javascript%E6%A6%82%E5%BF%B5/"/>
+    
+      <category term="BOM理解" scheme="http://yoursite.com/tags/BOM%E7%90%86%E8%A7%A3/"/>
+    
+      <category term="DOM理解" scheme="http://yoursite.com/tags/DOM%E7%90%86%E8%A7%A3/"/>
+    
+  </entry>
   
   <entry>
     <title>手机开发问题总结</title>
