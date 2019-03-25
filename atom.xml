@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-07-03T08:26:54.000Z</updated>
+  <updated>2019-03-25T03:59:04.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>gulp实现自动watch(gulp-watch)和自动刷新页面(browser-sync)</title>
+    <link href="http://yoursite.com/2019/03/25/gulp%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E7%9B%91%E5%90%ACgulp-watch%E5%92%8C%E8%87%AA%E5%8A%A8%E5%88%B7%E6%96%B0%E9%A1%B5%E9%9D%A2browser-sync/"/>
+    <id>http://yoursite.com/2019/03/25/gulp实现自动监听gulp-watch和自动刷新页面browser-sync/</id>
+    <published>2019-03-25T03:43:52.000Z</published>
+    <updated>2019-03-25T03:59:04.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文主要学习gulp实现自动watch(gulp-watch)和自动刷新页面(browser-sync)，自己做个总结，以防忘记。</p><a id="more"></a><h3 id="1、直接看-gulpfile-js-配置文件"><a href="#1、直接看-gulpfile-js-配置文件" class="headerlink" title="1、直接看 gulpfile.js 配置文件"></a>1、直接看 gulpfile.js 配置文件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">var</span> watch = <span class="built_in">require</span>(<span class="string">'gulp-watch'</span>);</span><br><span class="line"><span class="keyword">var</span> sass = <span class="built_in">require</span>(<span class="string">'gulp-sass'</span>);</span><br><span class="line"><span class="keyword">var</span> clean = <span class="built_in">require</span>(<span class="string">'gulp-clean'</span>);          <span class="comment">// 清空文件夹</span></span><br><span class="line"><span class="keyword">var</span> browserSync = <span class="built_in">require</span>(<span class="string">'browser-sync'</span>).create();    <span class="comment">// 用来打开一个浏览器</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> html_path = <span class="string">'src/**/*.html'</span>;</span><br><span class="line"><span class="keyword">var</span> css_libs_path = <span class="string">'src/css/**/*.css'</span>;</span><br><span class="line"><span class="keyword">var</span> sass_libs_path = <span class="string">'src/css/**/*.scss'</span>;</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'watch'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    w(<span class="string">'./src/**/*.html'</span>, <span class="string">'html'</span>);</span><br><span class="line">    w(css_libs_path, <span class="string">'css_libs'</span>);</span><br><span class="line">    w(sass_libs_path, <span class="string">'sass_libs'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">w</span>(<span class="params">path, task</span>)</span>&#123;</span><br><span class="line">        watch(path, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            gulp.start(task);</span><br><span class="line">            browserSync.reload();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 清空dist文件夹</span></span><br><span class="line">gulp.task(<span class="string">'clean'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">return</span> gulp.src([<span class="string">'dist/*'</span>])</span><br><span class="line">.pipe(clean());</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// html模板处理</span></span><br><span class="line">gulp.task(<span class="string">'html'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> gulp.src(html_path)</span><br><span class="line">        .pipe(gulp.dest(<span class="string">'dist'</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打包css</span></span><br><span class="line">gulp.task(<span class="string">'css_libs'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> gulp.src(css_libs_path)</span><br><span class="line">        .pipe(gulp.dest(<span class="string">'dist/css'</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打包sass</span></span><br><span class="line">gulp.task(<span class="string">'sass_libs'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> gulp.src(sass_libs_path)</span><br><span class="line">        .pipe(sass().on(<span class="string">'error'</span>, sass.logError))</span><br><span class="line">        .pipe(gulp.dest(<span class="string">'dist/css'</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 启本地服务，并打开浏览器</span></span><br><span class="line">gulp.task(<span class="string">'browser'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">browserSync.init(&#123;</span><br><span class="line">        server: <span class="string">'dist'</span>    <span class="comment">// 访问目录，自动指向该目录下的 index.html 文件</span></span><br><span class="line">        <span class="comment">// proxy: "你的域名或IP"    // 设置代理</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加入'watch'任务</span></span><br><span class="line">gulp.task(<span class="string">'default'</span>, [<span class="string">'clean'</span>], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    gulp.start([<span class="string">'html'</span>, <span class="string">'css_libs'</span>, <span class="string">'sass_libs'</span>, <span class="string">'browser'</span>, <span class="string">'watch'</span>])</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><h3 id="2、目录结构"><a href="#2、目录结构" class="headerlink" title="2、目录结构"></a>2、目录结构</h3><p><img src="//upload-images.jianshu.io/upload_images/1726248-490cb4b246e6737c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="目录结构"></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文主要学习gulp实现自动watch(gulp-watch)和自动刷新页面(browser-sync)，自己做个总结，以防忘记。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="gulp" scheme="http://yoursite.com/tags/gulp/"/>
+    
+      <category term="gulp-watch" scheme="http://yoursite.com/tags/gulp-watch/"/>
+    
+      <category term="browser-sync" scheme="http://yoursite.com/tags/browser-sync/"/>
+    
+  </entry>
   
   <entry>
     <title>理解用 async/await 来处理异步</title>
@@ -314,9 +338,9 @@
     
       <category term="前端开发" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
-      <category term="github" scheme="http://yoursite.com/tags/github/"/>
-    
       <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+      <category term="github" scheme="http://yoursite.com/tags/github/"/>
     
   </entry>
   
